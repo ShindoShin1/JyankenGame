@@ -1,0 +1,19 @@
+.hands {
+    display: table; /*テーブル要素に変更*/
+    width : 400px;
+    text-align: center;
+    float: left;
+}
+
+.skills { 
+    display: table; /*テーブル要素に変更*/
+    width : 100px;
+    text-align: center;
+    float: left;
+}
+
+.ctrl-button {
+    width: 80px;
+    display: table-cell; /*テーブルセル要素に変更*/
+    vertical-align: middle;
+}
