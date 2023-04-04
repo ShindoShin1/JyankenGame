@@ -23,12 +23,22 @@
 
 }
 
+#battle_log {
+    width: 500px;
+    max-height: 200px;
+    background-color: black;
+    color: limegreen;
+    margin:  0 auto;            /* 中央寄せ */
+}
+
 .card{
     width : 190px;
     height: 190px;
     background-color: white;
     float: left;
     margin: 5px;
+    text-align: center;         /*内部要素を中央寄せ*/
+    vertical-align: middle;         /*内部要素を中央寄せ*/
 }
 
 .status {

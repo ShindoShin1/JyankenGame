@@ -1,4 +1,9 @@
-var hnads_sign = ["グー","チョキ","パー"];
+var hands_sign = ["グー","チョキ","パー"];
+var hands_sign2 = [ 
+                    ["fa-solid", "fa-hand-fist"],
+                    ["fa-solid", "fa-wand-sparkles"],
+                    ["fa-solid", "fa-shield-halved"]
+                ]; //アイコン表示用
 
 var player_hitpoint = 7;
 var enemy_hitpoint = 7;
@@ -8,16 +13,37 @@ var battle_result;
 const reset_button = document.getElementById("reset");
 
 
+
 // ハンドボタンを押したときの処理
 function pon(player_hand) {
     if (!state_conclusion) {
         var enemy_hand; //相手の選択
 
+        const player_hand_area = document.getElementById("player_card");
+        const enemy_hand_area = document.getElementById("enemy_card");
+
+        //アイコン表示用
+        const player_hand_icon = document.createElement("i");
+        const enemy_hand_icon = document.createElement("i");
+
         //ランダム攻撃
         enemy_hand = enemy_Random();
 
-        document.getElementById("enemy_card").textContent = hnads_sign[enemy_hand];
-        document.getElementById("player_card").textContent = hnads_sign[player_hand];
+        if (player_hand_area.children.length != 0) {
+            player_hand_area.removeChild(player_hand_area.firstElementChild);
+            enemy_hand_area.removeChild(enemy_hand_area.firstElementChild);
+        }
+        player_hand_icon.classList.add(hands_sign2[player_hand][0]);
+        player_hand_icon.classList.add(hands_sign2[player_hand][1]);
+        player_hand_icon.classList.add("fa-10x");
+        enemy_hand_icon.classList.add(hands_sign2[enemy_hand][0]);
+        enemy_hand_icon.classList.add(hands_sign2[enemy_hand][1]);
+        enemy_hand_icon.classList.add("fa-10x");
+        //document.getElementById("enemy_card").textContent = hands_sign[enemy_hand];
+        //document.getElementById("player_card").textContent = hands_sign[player_hand];
+        
+        player_hand_area.appendChild(player_hand_icon);
+        enemy_hand_area.appendChild(enemy_hand_icon);
 
         //勝負結果計算
         damage(player_hand,enemy_hand);
@@ -25,7 +51,7 @@ function pon(player_hand) {
         //決着判定
         conclusion();
 
-        return hnads_sign[player_hand];
+        return hands_sign[player_hand];
     } else {
         return null;
     }
@@ -44,13 +70,26 @@ function damage(player_hand,enemy_hand){
     if (calc_Jyanken(player_hand,enemy_hand) == 0) {    //あいこ
         player_hitpoint = player_hitpoint - 1;
         enemy_hitpoint = enemy_hitpoint - 1;
-        battle_result = "あいこ";
+        //battle_result = "あいこ";
+        add_Log("あいこ:お互いに1ダメージ");
     }else if (calc_Jyanken(player_hand,enemy_hand) == 1) {   //プレイヤーの勝ち 
-        enemy_hitpoint = enemy_hitpoint - 2;
-        battle_result = "勝ち";
+        if (player_hand == player_status.type) {
+            enemy_hitpoint = enemy_hitpoint - 3;     //得意攻撃
+            add_Log("プレイヤーの強攻撃!:相手に3ダメージ!");
+        }else{
+            enemy_hitpoint = enemy_hitpoint - 2;     //通常攻撃  
+            add_Log("プレイヤーの攻撃:相手に2ダメージ");
+        }
+        //battle_result = "勝ち";
     }else {                                          //エネミーの勝ち
-        player_hitpoint = player_hitpoint - 2;
-        battle_result = "負け";
+        if (enemy_hand == enemy_status.type) {
+            player_hitpoint = player_hitpoint - 3;
+            add_Log("相手の強攻撃!:プレイヤーに3ダメージ!");
+        }else{
+            player_hitpoint = player_hitpoint - 2; 
+            add_Log("相手の攻撃:プレイヤーに2ダメージ");           
+        }
+        //battle_result = "負け";
     }
 
     if (player_hitpoint < 1) player_hitpoint = 0;
@@ -91,4 +130,12 @@ function reset() {
     document.getElementById("player_hitpoint").value = player_hitpoint;
     document.getElementById("enemy_hitpoint").value = enemy_hitpoint;
     reset_button.className = "hidden";
+
+    //キャラクター情報
+    create_player(0);
+    create_enemy(0);
+    display_status();
+
+    reset_Log();
 }
+
