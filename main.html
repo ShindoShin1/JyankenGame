@@ -3,11 +3,19 @@
 
 <head>
 	<meta charset="utf-8">
+	<meta property="og:url" content="https://github.com/ShindoShin1/JyankenGame/main.html">
+   <meta property="og:type" content="product">
+   <meta property="og:title" content="じゃんけんゲーム">
+   <meta property="og:description" content="じゃんけんゲーム作ってみました。">
+   <meta property="og:site_name" content="じゃんけんゲーム">
+   <meta property="og:image" content="https://github.com/ShindoShin1/JyankenGame/icon/hand-fist-solid.svg">
+
 	<link rel="stylesheet" href="css/sanitize.css" type="text/css">
 	<link rel="stylesheet" href="css/base.css" type="text/css">
 	<link rel="stylesheet" href="css/panel.css" type="text/css">
 	<link rel="stylesheet" href="css/controller.css" type="text/css">
 	<link rel="stylesheet" href="css/status.css" type="text/css">
+	<link rel="stylesheet" href="css/icon.css" type="text/css">
 	<title>Game_main</title>
 	<script src="https://kit.fontawesome.com/d4e9f91477.js" crossorigin="anonymous"></script>
 	<script src="./tsc/test.js"></script>
@@ -29,7 +37,7 @@
 							<span>属性:</span><span id="enemy_type"></span>
 						</div>
 						<label for="enemy_hitpoint"><i class="fa-solid fa-heart"></i></label>
-						<meter id="enemy_hitpoint" class="hitpoint" max="7" low="2" high="5" optimum="7"
+						<meter id="enemy_hitpoint" class="hitpoint" max="14" low="4" high="10" optimum="14"
 							value="7">HP</meter>
 						<div class="skill1">
 							<span>メインスキル:</span>
@@ -48,7 +56,7 @@
 							<span>属性:</span><span id="player_type"></span>
 						</div>
 						<label for="player_hitpoint"><i class="fa-solid fa-heart"></i></label>
-						<meter id="player_hitpoint" class="hitpoint" max="7" low="2" high="5" optimum="7"
+						<meter id="player_hitpoint" class="hitpoint" max="14" low="4" high="10" optimum="14"
 							value="7">HP</meter>
 						<div class="skill1">
 							<span>メインスキル:</span>

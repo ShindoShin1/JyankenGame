@@ -29,7 +29,22 @@
     background-color: black;
     color: limegreen;
     margin:  0 auto;            /* 中央寄せ */
+    overflow: auto;
 }
+
+.good {
+    color: lightgreen;
+}
+
+.bad {
+    color: darkred;
+}
+
+.alert {
+    color: gold;
+}
+
+
 
 .card{
     width : 190px;
